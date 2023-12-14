@@ -3,24 +3,24 @@ import styled from '@emotion/styled';
 import { Group, Image, Space, Stack, Tabs, TabsValue, useMantineColorScheme } from '@mantine/core';
 import {
   ChannelTypeEnum,
-  emailProviders,
-  smsProviders,
-  pushProviders,
-  inAppProviders,
   chatProviders,
+  emailProviders,
   InAppProviderIdEnum,
+  inAppProviders,
+  pushProviders,
+  smsProviders,
 } from '@novu/shared';
 
 import {
-  colors,
-  Sidebar,
   Button,
+  colors,
+  getGradient,
   Input,
+  Search,
+  Sidebar,
+  Text,
   Title,
   Tooltip,
-  Text,
-  getGradient,
-  Search,
   useTabsStyles,
 } from '@novu/design-system';
 import { useDebounce } from '../../../../hooks';
@@ -65,7 +65,7 @@ export function SelectProviderSidebar({
   onNextStepClick: (selectedProvider: IIntegratedProvider) => void;
 }) {
   const [providersList, setProvidersList] = useState(initialProvidersList);
-  const [selectedTab, setSelectedTab] = useState(ChannelTypeEnum.IN_APP);
+  const [selectedTab, setSelectedTab] = useState<ChannelTypeEnum | null>(null);
   const { isLoading: isIntegrationsLoading, providers: integrations } = useProviders();
 
   const inAppCount: number = useMemo(() => {
@@ -85,6 +85,7 @@ export function SelectProviderSidebar({
   const { classes: tabsClasses } = useTabsStyles(false);
 
   const debouncedSearchChange = useDebounce((search: string) => {
+    setSelectedTab(null);
     setProvidersList({
       [ChannelTypeEnum.EMAIL]: filterSearch(providersList[ChannelTypeEnum.EMAIL], search),
       [ChannelTypeEnum.SMS]: filterSearch(providersList[ChannelTypeEnum.SMS], search),
@@ -104,22 +105,24 @@ export function SelectProviderSidebar({
         return;
       }
 
-      setSelectedTab(elementId as ChannelTypeEnum);
+      const channelType = elementId as ChannelTypeEnum;
+      setSelectedTab(channelType);
 
-      const element = document.getElementById(elementId);
-
-      element?.parentElement?.scrollTo({
-        behavior: 'smooth',
-        top: element?.offsetTop ? element?.offsetTop - 250 : undefined,
+      setProvidersList({
+        [ChannelTypeEnum.EMAIL]: channelType === ChannelTypeEnum.EMAIL ? providersList[ChannelTypeEnum.EMAIL] : [],
+        [ChannelTypeEnum.SMS]: channelType === ChannelTypeEnum.SMS ? providersList[ChannelTypeEnum.SMS] : [],
+        [ChannelTypeEnum.PUSH]: channelType === ChannelTypeEnum.PUSH ? providersList[ChannelTypeEnum.PUSH] : [],
+        [ChannelTypeEnum.IN_APP]: channelType === ChannelTypeEnum.IN_APP ? providersList[ChannelTypeEnum.IN_APP] : [],
+        [ChannelTypeEnum.CHAT]: channelType === ChannelTypeEnum.CHAT ? providersList[ChannelTypeEnum.CHAT] : [],
       });
     },
-    [setSelectedTab]
+    [setSelectedTab, setProvidersList]
   );
 
   const onSidebarClose = () => {
     onClose();
     setProvidersList(initialProvidersList);
-    setSelectedTab(inAppCount < 2 ? ChannelTypeEnum.IN_APP : ChannelTypeEnum.EMAIL);
+    setSelectedTab(null);
   };
 
   useEffect(() => {
@@ -196,11 +199,7 @@ export function SelectProviderSidebar({
               const list = providersList[channelType];
 
               return (
-                <Tabs.Tab
-                  key={channelType}
-                  hidden={list.length === 0 || (channelType === ChannelTypeEnum.IN_APP && inAppCount === 2)}
-                  value={channelType}
-                >
+                <Tabs.Tab key={channelType} value={channelType}>
                   <ChannelTitle spacing={5} channel={channelType} />
                 </Tabs.Tab>
               );
@@ -328,6 +327,7 @@ const StyledButton = styled.div<{ selected: boolean }>`
 
   margin-bottom: 12px;
   line-height: 1;
+
   &:hover {
     cursor: pointer;
   }

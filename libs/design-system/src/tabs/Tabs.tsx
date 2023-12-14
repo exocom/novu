@@ -55,6 +55,7 @@ export const Tabs = React.forwardRef<HTMLDivElement, ITabsProp>(
           variant="default"
           classNames={classes}
           keepMounted={keepMounted}
+          allowTabDeactivation={true}
         >
           <MantineTabs.List>
             {menuTabs.map((menuTab, i) =>
