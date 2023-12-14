@@ -32,6 +32,7 @@ export function isChannelStepType(type: StepTypeEnum) {
     StepTypeEnum.EMAIL,
     StepTypeEnum.SMS,
     StepTypeEnum.PUSH,
+    StepTypeEnum.VOIP_PUSH,
     StepTypeEnum.CHAT,
   ];
 

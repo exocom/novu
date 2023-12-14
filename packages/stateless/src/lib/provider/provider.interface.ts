@@ -175,6 +175,12 @@ export interface IPushProvider extends IProvider {
   channelType: ChannelTypeEnum.PUSH;
 }
 
+export interface IVoipPushProvider extends IProvider {
+  sendMessage(options: IPushOptions): Promise<ISendMessageSuccessResponse>;
+
+  channelType: ChannelTypeEnum.PUSH;
+}
+
 export interface ICheckIntegrationResponse {
   success: boolean;
   message: string;

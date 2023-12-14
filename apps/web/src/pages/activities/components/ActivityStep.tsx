@@ -29,6 +29,8 @@ const TypeIcon = ({ type }: { type: StepTypeEnum }) => {
       return <Chat width={22} height={22} />;
     case StepTypeEnum.PUSH:
       return <Mobile width={22} height={22} />;
+    case StepTypeEnum.VOIP_PUSH:
+      return <Mobile width={22} height={22} />;
     case StepTypeEnum.IN_APP:
       return <InApp width={22} height={22} />;
     case StepTypeEnum.DIGEST:

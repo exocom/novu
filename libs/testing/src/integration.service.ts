@@ -9,6 +9,7 @@ import {
   ProvidersIdEnum,
   PushProviderIdEnum,
   SmsProviderIdEnum,
+  VoipPushProviderIdEnum,
 } from '@novu/shared';
 
 export class IntegrationService {
@@ -44,6 +45,9 @@ export class IntegrationService {
           break;
         case ChannelTypeEnum.PUSH:
           providerId = PushProviderIdEnum.FCM;
+          break;
+        case ChannelTypeEnum.VOIP_PUSH:
+          providerId = VoipPushProviderIdEnum.APNS;
           break;
         case ChannelTypeEnum.IN_APP:
           providerId = InAppProviderIdEnum.Novu;

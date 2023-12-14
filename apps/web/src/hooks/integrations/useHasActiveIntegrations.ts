@@ -23,6 +23,7 @@ export function useHasActiveIntegrations({ filterByEnv = true, channelType }: Us
       ChannelTypeEnum.IN_APP,
       ChannelTypeEnum.EMAIL,
       ChannelTypeEnum.PUSH,
+      ChannelTypeEnum.VOIP_PUSH,
       ChannelTypeEnum.SMS,
       ChannelTypeEnum.CHAT,
     ].includes(channelType);

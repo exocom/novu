@@ -78,6 +78,10 @@ export const getLogoByType = (
     return Mobile;
   }
 
+  if (type === StepTypeEnum.VOIP_PUSH) {
+    return Mobile;
+  }
+
   return null;
 };
 

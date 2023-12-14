@@ -119,6 +119,11 @@ export enum PushProviderIdEnum {
   PusherBeams = 'pusher-beams',
 }
 
+export enum VoipPushProviderIdEnum {
+  APNS = 'apns',
+  SNS = 'sns',
+}
+
 export enum InAppProviderIdEnum {
   Novu = 'novu',
 }
@@ -127,5 +132,6 @@ export type ProvidersIdEnum =
   | EmailProviderIdEnum
   | SmsProviderIdEnum
   | PushProviderIdEnum
+  | VoipPushProviderIdEnum
   | InAppProviderIdEnum
   | ChatProviderIdEnum;

@@ -37,6 +37,7 @@ export const CHANNELS_ORDER = [
   ChannelTypeEnum.EMAIL,
   ChannelTypeEnum.CHAT,
   ChannelTypeEnum.PUSH,
+  ChannelTypeEnum.VOIP_PUSH,
   ChannelTypeEnum.SMS,
 ];
 

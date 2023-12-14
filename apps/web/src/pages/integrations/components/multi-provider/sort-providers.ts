@@ -6,6 +6,7 @@ import {
   ProvidersIdEnum,
   PushProviderIdEnum,
   SmsProviderIdEnum,
+  VoipPushProviderIdEnum,
 } from '@novu/shared';
 
 import type { IIntegratedProvider } from '../../types';
@@ -50,6 +51,7 @@ const providers: Record<ChannelTypeEnum, ProvidersIdEnum[]> = {
     PushProviderIdEnum.Pushpad,
     PushProviderIdEnum.PusherBeams,
   ],
+  [ChannelTypeEnum.VOIP_PUSH]: [VoipPushProviderIdEnum.APNS],
   [ChannelTypeEnum.SMS]: [
     SmsProviderIdEnum.Twilio,
     SmsProviderIdEnum.BurstSms,

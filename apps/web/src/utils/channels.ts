@@ -31,6 +31,7 @@ export const CHANNEL_TYPE_TO_STRING: Record<ChannelTypeEnum, string> = {
   [ChannelTypeEnum.SMS]: 'SMS',
   [ChannelTypeEnum.CHAT]: 'Chat',
   [ChannelTypeEnum.PUSH]: 'Push',
+  [ChannelTypeEnum.VOIP_PUSH]: 'VOIP Push',
 };
 
 export const channels: IChannelDefinition[] = [
@@ -95,6 +96,15 @@ export const channels: IChannelDefinition[] = [
     Icon: PushFilled,
     testId: 'pushSelector',
     channelType: StepTypeEnum.PUSH,
+    type: NodeTypeEnum.CHANNEL,
+  },
+  {
+    tabKey: ChannelTypeEnum.VOIP_PUSH,
+    label: 'VOIP Push',
+    description: "Send an VOIP Push Notification to a user's device",
+    Icon: PushFilled,
+    testId: 'pushSelector',
+    channelType: StepTypeEnum.VOIP_PUSH,
     type: NodeTypeEnum.CHANNEL,
   },
 ];
